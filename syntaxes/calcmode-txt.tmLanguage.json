@@ -1,0 +1,35 @@
+{
+	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+	"name": "calc mode",
+	"patterns": [
+		{
+			"include": "#keywords"
+		}
+	],
+	"repository": {
+		"keywords": {
+			"patterns": [{
+				"name": "keyword.control.txt",
+				"match": "\\b(clear|help|derivative|lsolve|lsolveAll|lup|lusolve|qr|rationalize|simplify|slu|usolve|usolveAll|abs|add|cbrt|ceil|cube|divide|dotDivide|dotMultiply|dotPow|exp|expm1|fix|floor|gcd|hypot|lcm|log|log10|log1p|log2|mod|multiply|norm|nthRoot|nthRoots|pow|round|sign|sqrt|square|subtract|unaryMinus|unaryPlus|xgcd|bitAnd|bitNot|bitOr|bitXor|leftShift|rightArithShift|rightLogShift|bellNumbers|catalan|composition|stirlingS2|arg|conj|im|re|distance|intersect|and|not|or|xor|apply|column|concat|count|cross|ctranspose|det|diag|diff|dot|eigs|expm|filter|flatten|forEach|getMatrixDataType|identity|inv|kron|map|matrixFromColumns|matrixFromFunction|matrixFromRows|ones|partitionSelect|range|reshape|resize|rotate|rotationMatrix|row|size|sort|sqrtm|squeeze|subset|trace|transpose|zeros|combinations|combinationsWithRep|factorial|gamma|kldivergence|multinomial|permutations|pickRandom|random|randomInt|compare|compareNatural|compareText|deepEqual|equal|equalText|larger|largerEq|smaller|smallerEq|unequal|setCartesian|setDifference|setDistinct|setIntersect|setIsSubset|setMultiplicity|setPowerset|setSize|setSymDifference|setUnion|erf|mad|max|mean|median|min|mode|prod|quantileSeq|std|sum|variance|bin|format|hex|oct|print|acos|acosh|acot|acoth|acsc|acsch|asec|asech|asin|asinh|atan|atan2|atanh|cos|cosh|cot|coth|csc|csch|sec|sech|sin|sinh|tan|tanh|to|clone|hasNumericValue|isInteger|isNaN|isNegative|isNumeric|isPositive|isPrime|isZero|numeric|typeOf)\\b"
+			},
+			{
+				"name": "variable",
+				"match": "\\b(pi|PI|e|E|i|Infinity|LN2|LN10|LOG2E|LOG10E|NaN|null|phi|SQRT1_2|SQRT2|tau|undefined|version)\\b"
+			},
+			{
+				"match": "^= (function$)",
+				"captures": {
+					"1": {"name": "variable"}
+				}
+			},
+			{
+				"match": "^= (Error:.*$)",
+				"captures": {
+					"1": {"name": "invalid"}
+				}
+			}
+		]
+		}
+	},
+	"scopeName": "source.calcmode"
+}
