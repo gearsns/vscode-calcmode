@@ -2,7 +2,7 @@
     "name": "calc-mode",
     "displayName": "電卓拡張機能(calc-mode)",
     "description": "MathJSを使用した電卓拡張機能です。",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "gearsns",
     "icon": "icon.png",
     "repository": {

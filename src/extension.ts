@@ -11,6 +11,7 @@ export function activate(context: vscode.ExtensionContext) {
 		parser.clear();
 		return "Clear";
 	};
+	math.config({number: 'BigNumber'});
 	math.import({
 		clear: parserClear,
 		help: (arg: any) => {
@@ -29,7 +30,7 @@ export function activate(context: vscode.ExtensionContext) {
 		if (text.length > 0 && text.match(/^[^=]/)) {
 			editor.edit(e => {
 				try {
-					const ret = math.format(parser.evaluate(text));
+					const ret = math.format(parser.evaluate(text), {upperExp: 15});
 					e.insert(new vscode.Position(range.end.line + 1, 0), `= ${ret}\n`);
 				} catch (error) {
 					e.insert(new vscode.Position(range.end.line + 1, 0), `= ${error}\n`);
@@ -76,7 +77,7 @@ export function activate(context: vscode.ExtensionContext) {
 		['calcmode'],
 		{
 			async provideCompletionItems(document: vscode.TextDocument, position: vscode.Position) {
-				const funcList = "clear|help|derivative|lsolve|lsolveAll|lup|lusolve|qr|rationalize|simplify|slu|usolve|usolveAll|abs|add|cbrt|ceil|cube|divide|dotDivide|dotMultiply|dotPow|exp|expm1|fix|floor|gcd|hypot|lcm|log|log10|log1p|log2|mod|multiply|norm|nthRoot|nthRoots|pow|round|sign|sqrt|square|subtract|unaryMinus|unaryPlus|xgcd|bitAnd|bitNot|bitOr|bitXor|leftShift|rightArithShift|rightLogShift|bellNumbers|catalan|composition|stirlingS2|arg|conj|im|re|distance|intersect|and|not|or|xor|apply|column|concat|count|cross|ctranspose|det|diag|diff|dot|eigs|expm|filter|flatten|forEach|getMatrixDataType|identity|inv|kron|map|matrixFromColumns|matrixFromFunction|matrixFromRows|ones|partitionSelect|range|reshape|resize|rotate|rotationMatrix|row|size|sort|sqrtm|squeeze|subset|trace|transpose|zeros|combinations|combinationsWithRep|factorial|gamma|kldivergence|multinomial|permutations|pickRandom|random|randomInt|compare|compareNatural|compareText|deepEqual|equal|equalText|larger|largerEq|smaller|smallerEq|unequal|setCartesian|setDifference|setDistinct|setIntersect|setIsSubset|setMultiplicity|setPowerset|setSize|setSymDifference|setUnion|erf|mad|max|mean|median|min|mode|prod|quantileSeq|std|sum|variance|bin|format|hex|oct|print|acos|acosh|acot|acoth|acsc|acsch|asec|asech|asin|asinh|atan|atan2|atanh|cos|cosh|cot|coth|csc|csch|sec|sech|sin|sinh|tan|tanh|to|clone|hasNumericValue|isInteger|isNaN|isNegative|isNumeric|isPositive|isPrime|isZero|numeric|typeOf|to|clone|hasNumericValue|isInteger|isNaN|isNegative|isNumeric|isPositive|isPrime|isZero|numeric|typeOf";
+				const funcList = "clear|fraction|help|derivative|lsolve|lsolveAll|lup|lusolve|qr|rationalize|simplify|slu|usolve|usolveAll|abs|add|cbrt|ceil|cube|divide|dotDivide|dotMultiply|dotPow|exp|expm1|fix|floor|gcd|hypot|lcm|log|log10|log1p|log2|mod|multiply|norm|nthRoot|nthRoots|pow|round|sign|sqrt|square|subtract|unaryMinus|unaryPlus|xgcd|bitAnd|bitNot|bitOr|bitXor|leftShift|rightArithShift|rightLogShift|bellNumbers|catalan|composition|stirlingS2|arg|conj|im|re|distance|intersect|and|not|or|xor|apply|column|concat|count|cross|ctranspose|det|diag|diff|dot|eigs|expm|filter|flatten|forEach|getMatrixDataType|identity|inv|kron|map|matrixFromColumns|matrixFromFunction|matrixFromRows|ones|partitionSelect|range|reshape|resize|rotate|rotationMatrix|row|size|sort|sqrtm|squeeze|subset|trace|transpose|zeros|combinations|combinationsWithRep|factorial|gamma|kldivergence|multinomial|permutations|pickRandom|random|randomInt|compare|compareNatural|compareText|deepEqual|equal|equalText|larger|largerEq|smaller|smallerEq|unequal|setCartesian|setDifference|setDistinct|setIntersect|setIsSubset|setMultiplicity|setPowerset|setSize|setSymDifference|setUnion|erf|mad|max|mean|median|min|mode|prod|quantileSeq|std|sum|variance|bin|format|hex|oct|print|acos|acosh|acot|acoth|acsc|acsch|asec|asech|asin|asinh|atan|atan2|atanh|cos|cosh|cot|coth|csc|csch|sec|sech|sin|sinh|tan|tanh|to|clone|hasNumericValue|isInteger|isNaN|isNegative|isNumeric|isPositive|isPrime|isZero|numeric|typeOf|to|clone|hasNumericValue|isInteger|isNaN|isNegative|isNumeric|isPositive|isPrime|isZero|numeric|typeOf";
 				let completionItems: vscode.CompletionItem[] = [];
 				for (const name of funcList.split("|")) {
 					completionItems.push(new vscode.CompletionItem(name));
